@@ -123,7 +123,22 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="AnimatedSprite.cpp" />
+    <ClCompile Include="AnimatedSprite.hpp" />
+    <ClCompile Include="Animation.cpp" />
+    <ClCompile Include="GameObject.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="Movable.cpp" />
+    <ClCompile Include="Player.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Animation.hpp" />
+    <ClInclude Include="Block.h" />
+    <ClInclude Include="Dimensions.h" />
+    <ClInclude Include="GameObject.h" />
+    <ClInclude Include="Manager.h" />
+    <ClInclude Include="Movable.h" />
+    <ClInclude Include="Player.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
