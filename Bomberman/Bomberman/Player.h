@@ -1,43 +1,33 @@
 #pragma once
-#include "GameObject.h"
-#include <SFML/Graphics.hpp>
-#include "Animation.hpp"
-#include <iostream>
-#include "AnimatedSprite.hpp"
 #include "Movable.h"
-#include "Dimensions.h"
+#include <SFML\Graphics.hpp>
+#include "AnimatedSprite.hpp"
+#include <time.h>
 
-class Player : public Movable
+extern sf::RenderWindow window;
+
+
+class Player :
+	public Movable
 {
 public:
 	Player();
 	~Player();
-
-	int Lives;
-	bool CanEatGhost;
-
-	virtual void Init() override;
-
-
-	virtual void Move() override;
-	void StopMovingInCurrentDirection();
-	void CantMove();
-	void CanMove();
+	
+	void MoveRight();
+	void MoveLeft();
+	void MoveUp();
+	void MoveDown();
 
 
+	AnimatedSprite PlayerAnimatedSprite;
 
-	void SetCurrentAnimationDead();
-
-
-	AnimatedSprite BombermanAnimatedSprite;
-	//AnimatedSprite DeadBombermanAnimatedSprite;
-
-	void Restart();
 
 private:
-	
-	/*
-	sf::Texture DeadBombermanSpriteSheet;
 
-	Animation DeadAnimation;*/
+
+	void Init();
+	int Speed = 1;
+	sf::Texture Texture;
 };
+

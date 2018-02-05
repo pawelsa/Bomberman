@@ -2,13 +2,13 @@
 #include "Block.h"
 #include "Player.h"
 
+
 class Manager {
 
 	//			   Y  X
 	Block *blocks[11][15];
-	Player *player1;
-
 public:
+	Player myPlayer;
 
 	Manager() {
 
@@ -41,7 +41,7 @@ public:
 			}
 
 			dim::BombermanTexture.loadFromFile("player.png");
-			player1 = new Player();
+	
 
 		}
 		catch (const std::exception& ex) {
@@ -62,6 +62,7 @@ public:
 				blocks[mY][mX]->display();
 			}
 		}
+		
 	}
 
 

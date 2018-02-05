@@ -3,6 +3,7 @@
 
 
 	sf::RenderWindow window(sf::VideoMode(dim::ScreenDimensions.x, dim::ScreenDimensions.y), "Bomberman");
+	sf::Clock frameClock;
 
 int main()
 {
@@ -18,16 +19,38 @@ int main()
 		{
 			if (event.type == sf::Event::Closed)
 				window.close();
+			
+			if (sf::Keyboard::isKeyPressed(sf::Keyboard::W))
+			{
+				newManager->myPlayer.MoveUp();
+			}
 
+			if (sf::Keyboard::isKeyPressed(sf::Keyboard::S))
+			{
+				newManager->myPlayer.MoveDown();
 
+			}
 
+			if (sf::Keyboard::isKeyPressed(sf::Keyboard::A))
+			{
+				newManager->myPlayer.MoveLeft();
+			}
+
+			if (sf::Keyboard::isKeyPressed(sf::Keyboard::D))
+			{
+				newManager->myPlayer.MoveRight();
+			}
 
 		}
 
 		window.clear();
 
+		
 
 		newManager->display();
+		window.draw(newManager->myPlayer.PlayerAnimatedSprite);
+		newManager->myPlayer.PlayerAnimatedSprite.play(*newManager->myPlayer.CurrentAnimation);
+		newManager->myPlayer.PlayerAnimatedSprite.update(frameClock.restart());
 
 
 		window.display();

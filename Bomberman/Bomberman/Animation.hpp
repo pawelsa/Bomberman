@@ -1,5 +1,3 @@
-#pragma once
-
 ////////////////////////////////////////////////////////////
 //
 // Copyright (C) 2014 Maximilian Wagenbach (aka. Foaly) (foaly.f@web.de)
