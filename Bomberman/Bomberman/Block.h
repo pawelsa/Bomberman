@@ -42,6 +42,7 @@ public:
 			}
 			else if (mTypeOfBlock == 3) {
 
+				isDestructed = true;
 				Square.setTextureRect(sf::IntRect(20, 200, dim::BlockSize.x, dim::BlockSize.y));
 			}
 			
@@ -54,6 +55,16 @@ public:
 			throw ex;
 		}
 
+	}
+
+	bool isDestroyed() {
+
+		return isDestructed;
+	}
+
+	sf::FloatRect getGlobalBounds() {
+
+		return Square.getGlobalBounds();
 	}
 
 	void display() {
