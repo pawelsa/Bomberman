@@ -11,7 +11,7 @@ public:
 	~Movable();
 
 	virtual void Init() = 0;
-
+	
 	
 	void SetCurrentAnimationRight();
 	void SetCurrentAnimationLeft();

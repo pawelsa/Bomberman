@@ -15,6 +15,7 @@ void Player::MoveRight()
 {
 	SetCurrentAnimationRight();
 	PlayerAnimatedSprite.move(Speed,0);
+
 }
 
 void Player::MoveLeft()
@@ -65,5 +66,6 @@ void Player::Init()
 
 	SetCurrentAnimationDown();
 	PlayerAnimatedSprite.setPosition(100, 100);
+	
 
 }
