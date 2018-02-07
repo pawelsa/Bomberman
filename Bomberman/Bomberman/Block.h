@@ -1,6 +1,7 @@
 #pragma once
 #include "Dimensions.h"
 #include <iostream>
+#include "Bomb.h"
 
 extern sf::RenderWindow window;
 
@@ -10,6 +11,8 @@ class Block {
 
 	bool isDestructable = false;
 	bool isDestructed = false;
+
+	Bomb *theBomb = NULL;
 
 
 public:
@@ -70,6 +73,11 @@ public:
 	void display() {
 
 		window.draw(Square);
+	}
+
+	void plantBomb(Bomb *mBomb) {
+
+		theBomb = mBomb;
 	}
 
 

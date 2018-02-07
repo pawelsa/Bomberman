@@ -19,7 +19,6 @@ public:
 	void MoveUp();
 	void MoveDown();
 
-
 	AnimatedSprite PlayerAnimatedSprite;
 
 

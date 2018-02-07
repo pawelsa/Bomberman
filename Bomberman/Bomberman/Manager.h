@@ -39,8 +39,6 @@ public:
 					}
 				}
 			}
-
-			dim::BombermanTexture.loadFromFile("player.png");
 	
 
 		}
@@ -62,9 +60,46 @@ public:
 				blocks[mY][mX]->display();
 			}
 		}
+
+		collision();
 		
 	}
 
 
+	bool collision() {
+
+
+		for (int mY = 0; mY < 11; mY++) {
+
+			for (int mX = 0; mX < 15; mX++) {
+				
+				if (myPlayer.PlayerAnimatedSprite.getGlobalBounds().intersects(blocks[mY][mX]->getGlobalBounds()) && !blocks[mY][mX]->isDestroyed()) {
+
+					std::cout << "Collision!\n\n";
+					return true;
+				}
+			}
+		}
+
+		return false;
+	}
+
+	void plantBomb(int playerWhoPlanted) {
+
+					//trzeba potem tu ustawic drugiego gracza	\/
+		Player *bomber = playerWhoPlanted == 1 ? &myPlayer : &myPlayer;
+
+		sf::Vector2i bomberPosition_CenterOfBody =
+			sf::Vector2i(bomber->PlayerAnimatedSprite.getGlobalBounds().left + bomber->PlayerAnimatedSprite.getGlobalBounds().width / 2,
+				bomber->PlayerAnimatedSprite.getGlobalBounds().top + bomber->PlayerAnimatedSprite.getGlobalBounds().height / 2);
+
+		if (bomberPosition_CenterOfBody.x > 0 && bomberPosition_CenterOfBody.x < 15 
+			&& bomberPosition_CenterOfBody.y>0 && bomberPosition_CenterOfBody.y < 11) {
+
+			blocks[bomberPosition_CenterOfBody.y][bomberPosition_CenterOfBody.x]->plantBomb(new Bomb(bomberPosition_CenterOfBody));
+		}
+
+
+	}
 
 };

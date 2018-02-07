@@ -41,16 +41,21 @@ int main()
 				newManager->myPlayer.MoveRight();
 			}
 
+			if (sf::Keyboard::isKeyPressed(sf::Keyboard::LControl)) {
+
+				//newManager
+			}
+
 		}
 
 		window.clear();
 
 		
 
-		newManager->display();
-		window.draw(newManager->myPlayer.PlayerAnimatedSprite);
 		newManager->myPlayer.PlayerAnimatedSprite.play(*newManager->myPlayer.CurrentAnimation);
 		newManager->myPlayer.PlayerAnimatedSprite.update(frameClock.restart());
+		newManager->display();
+		window.draw(newManager->myPlayer.PlayerAnimatedSprite);
 
 
 		window.display();

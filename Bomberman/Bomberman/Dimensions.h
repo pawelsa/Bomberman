@@ -10,6 +10,5 @@ namespace dim {
 	sf::Vector2f BlockSize = sf::Vector2f(60, 60);
 
 	sf::Texture BlockTexture;
-	sf::Texture BombermanTexture;
 
 }
