@@ -125,11 +125,13 @@
   <ItemGroup>
     <ClCompile Include="AnimatedSprite.cpp" />
     <ClCompile Include="Animation.cpp" />
+    <ClCompile Include="Block.cpp" />
     <ClCompile Include="Bomb.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Manager.cpp" />
     <ClCompile Include="Movable.cpp" />
     <ClCompile Include="Player.cpp" />
+    <ClCompile Include="Position.cpp" />
     <ClCompile Include="UiManager.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -137,10 +139,10 @@
     <ClInclude Include="Animation.hpp" />
     <ClInclude Include="Block.h" />
     <ClInclude Include="Bomb.h" />
-    <ClInclude Include="Dimensions.h" />
     <ClInclude Include="Manager.h" />
     <ClInclude Include="Movable.h" />
     <ClInclude Include="Player.h" />
+    <ClInclude Include="Position.h" />
     <ClInclude Include="UiManager.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

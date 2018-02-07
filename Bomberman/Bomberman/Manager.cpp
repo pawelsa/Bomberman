@@ -70,9 +70,16 @@ void Manager::GameLoop()
 				}
 			}
 
+			if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space))
+			{
+				PlaceABomb();
+			}
+
 		}
+		BombHandling();
 		UIM.DrawBlocks(GetBlocks());
 		UIM.DrawPlayer(myPlayer);
+		UIM.DrawBombs(BombList);
 		UIM.window->display();
 	}
 }
@@ -90,13 +97,16 @@ void Manager::Init()
 
 				if ((mY % 2 == 0 && mX % 2 == 0) || mY == 0 || mX == 0 || mY == 10 || mX == 14)
 				{
-					Blocks.push_front(new Block(sf::Vector2f(mX*BlockSize.x, mY*BlockSize.y), 1));
+					sf::Vector2f coordinatesOfBlockToAdd = sf::Vector2f(mX*BlockSize.x, mY*BlockSize.y);
+					Position positonOfBlockToAdd = Position(mX, mY);
+					Blocks.push_front(new Block(coordinatesOfBlockToAdd, 1, positonOfBlockToAdd));
 
 				}
 				else 
 				{
-
-					Blocks.push_front(new Block(sf::Vector2f(mX*BlockSize.x, mY*BlockSize.y), 3));
+					sf::Vector2f coordinatesOfBlockToAdd = sf::Vector2f(mX*BlockSize.x, mY*BlockSize.y);
+					Position positonOfBlockToAdd = Position(mX, mY);
+					Blocks.push_front(new Block(coordinatesOfBlockToAdd, 3, positonOfBlockToAdd));
 				}
 			}
 		}
@@ -116,6 +126,27 @@ void Manager::Init()
 std::list<Block*> Manager::GetBlocks()
 {
 	return Blocks;
+}
+
+void Manager::PlaceABomb()
+{
+	auto playerPosition = myPlayer->PlayerAnimatedSprite.getPosition();
+	Bomb* bombToAdd = new Bomb(playerPosition);
+	BombList.push_front(bombToAdd);
+}
+
+void Manager::BombHandling()
+{
+	auto listOfBombs = BombList;
+	for (Bomb* bomb : BombList)
+	{
+		bomb->BombTimer();
+		if (bomb->BombLifetime == 0)
+		{
+			listOfBombs.remove(bomb);
+		}
+	}
+	BombList = listOfBombs;
 }
 
 

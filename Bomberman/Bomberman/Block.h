@@ -1,8 +1,9 @@
 #pragma once
-#include "Dimensions.h"
-#include <iostream>
 
-extern sf::RenderWindow window;
+#include <iostream>
+#include "Position.h"
+#include "SFML\Graphics.hpp"
+
 
 class Block 
 {
@@ -11,58 +12,13 @@ class Block
 	
 	sf::Texture BlockTexture;
 
-
 public:
 	sf::Sprite Square;
+	Position Pos;
+
 	bool isDestructable = false;
 	bool isDestructed = false;
-	Block(sf::Vector2f mPos, int mTypeOfBlock) 
-	{
-
-		try 
-		{
-			sf::Vector2f BlockSize = sf::Vector2f(60, 60);
-
-
-			/*
-				Type of block:
-
-				1	-	solid block
-				2	-	destructable
-				3	-	already destructed - floor block
-			*/
-			BlockTexture.loadFromFile("solidBricks.jpg");
-
-			Square.setTexture(BlockTexture);
-			Square.setPosition(mPos);
-
-
-			if (mTypeOfBlock == 1)
-			{
-				
-				Square.setTextureRect(sf::IntRect(20, 20, BlockSize.x,BlockSize.y));
-			}
-			else if (mTypeOfBlock == 2) 
-			{
-
-				Square.setTextureRect(sf::IntRect(20, 220, BlockSize.x, BlockSize.y));
-			}
-			else if (mTypeOfBlock == 3) 
-			{
-				isDestructed = true;
-				Square.setTextureRect(sf::IntRect(20, 200, BlockSize.x, BlockSize.y));
-			}
-			
-
-
-		}
-		catch (const std::exception& ex){
-
-			std::cout << "error occured durning initialization of a player" << ex.what() << std::endl;
-			throw ex;
-		}
-
-	}
+	Block(sf::Vector2f mPos, int mTypeOfBlock, Position position);
 
 	bool isDestroyed() 
 	{
@@ -71,7 +27,6 @@ public:
 
 	sf::FloatRect getGlobalBounds() 
 	{
-
 		return Square.getGlobalBounds();
 	}
 };
