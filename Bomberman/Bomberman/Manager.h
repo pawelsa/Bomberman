@@ -17,7 +17,7 @@ public:
 
 	void GameLoop();
 	
-
+	void plantBomb();
 	
 
 
@@ -25,14 +25,17 @@ private:
 
 	UiManager UIM;
 
+	sf::Texture BlockTexture;
+
+	sf::Vector2f BlockSize = sf::Vector2f(60, 60);
 
 	Player* myPlayer;
-	std::list<Block*> Blocks;
+	std::vector<Block*> Blocks;
 	void Init();
 	
-	std::list<Block*> GetBlocks();
+	std::vector<Block*> GetBlocks();
 	
-
+	bool collision();
 
 
 };

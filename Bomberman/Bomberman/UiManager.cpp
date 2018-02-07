@@ -12,7 +12,7 @@ UiManager::~UiManager()
 {
 }
 
-void UiManager::DrawBlocks(std::list<Block*> blocks)
+void UiManager::DrawBlocks(std::vector<Block*> blocks)
 {
 	for (Block* block : blocks)
 	{		

@@ -29,8 +29,9 @@ void Manager::GameLoop()
 				for (Block* block : Blocks)
 				{
 					if (myPlayer->PlayerAnimatedSprite.getGlobalBounds().intersects(block->getGlobalBounds()) && block->isDestructed != true)
-						myPlayer->MoveDown();
 
+							myPlayer->MoveDown();
+						
 				}
 
 			}
@@ -42,7 +43,8 @@ void Manager::GameLoop()
 				{
 					
 					if (myPlayer->PlayerAnimatedSprite.getGlobalBounds().intersects(block->getGlobalBounds()) && block->isDestructed != true)
-						myPlayer->MoveUp();
+
+							myPlayer->MoveUp();
 
 				}
 
@@ -54,8 +56,8 @@ void Manager::GameLoop()
 				for (Block* block : Blocks)
 				{
 					if (myPlayer->PlayerAnimatedSprite.getGlobalBounds().intersects(block->getGlobalBounds()) && block->isDestructed != true)
-						myPlayer->MoveRight();
 
+							myPlayer->MoveRight();
 				}
 			}
 
@@ -65,9 +67,15 @@ void Manager::GameLoop()
 				for (Block* block : Blocks)
 				{
 					if (myPlayer->PlayerAnimatedSprite.getGlobalBounds().intersects(block->getGlobalBounds()) && block->isDestructed != true)
-						myPlayer->MoveLeft();
+
+							myPlayer->MoveLeft();
 
 				}
+			}
+
+			if (sf::Keyboard::isKeyPressed(sf::Keyboard::LControl)) {
+
+				plantBomb();
 			}
 
 		}
@@ -83,6 +91,7 @@ void Manager::Init()
 
 		sf::Vector2f BlockSize = sf::Vector2f(60, 60);
 
+		BlockTexture.loadFromFile("solidBricks.jpg");
 
 		for (int mY = 0; mY < 11; mY++) {
 
@@ -90,13 +99,13 @@ void Manager::Init()
 
 				if ((mY % 2 == 0 && mX % 2 == 0) || mY == 0 || mX == 0 || mY == 10 || mX == 14)
 				{
-					Blocks.push_front(new Block(sf::Vector2f(mX*BlockSize.x, mY*BlockSize.y), 1));
+					Blocks.push_back(new Block(sf::Vector2i(mX*BlockSize.x, mY*BlockSize.y), 1, &BlockTexture));
 
 				}
 				else 
 				{
 
-					Blocks.push_front(new Block(sf::Vector2f(mX*BlockSize.x, mY*BlockSize.y), 3));
+					Blocks.push_back(new Block(sf::Vector2i(mX*BlockSize.x, mY*BlockSize.y), 3, &BlockTexture));
 				}
 			}
 		}
@@ -113,9 +122,60 @@ void Manager::Init()
 }
 
 
-std::list<Block*> Manager::GetBlocks()
+std::vector<Block*> Manager::GetBlocks()
 {
 	return Blocks;
 }
 
+void Manager::plantBomb() {
 
+
+	sf::Vector2i centerOfPlayerBody = sf::Vector2i(myPlayer->PlayerAnimatedSprite.getGlobalBounds().left+myPlayer->PlayerAnimatedSprite.getGlobalBounds().width/2,
+		myPlayer->PlayerAnimatedSprite.getGlobalBounds().top + myPlayer->PlayerAnimatedSprite.getGlobalBounds().height / 2);
+
+
+	centerOfPlayerBody = sf::Vector2i(centerOfPlayerBody.x / BlockSize.x, centerOfPlayerBody.y / BlockSize.y);
+
+	for (int i = 0; i < Blocks.size(); i++) {
+	
+		if (Blocks.at(i)->position == centerOfPlayerBody) {
+		
+			Blocks.at(i)->placeBomb(new Bomb(centerOfPlayerBody));
+		}
+
+	}
+
+}
+
+/*
+bool Manager::collision() {
+
+
+
+	for (Block *mblock : Blocks) {
+
+		if(mblock->getGlobalBounds().intersects(myPlayer->PlayerAnimatedSprite.getGlobalBounds()) && !mblock->isDestroyed()) {
+
+			std::cout << "collision by myPlayer1 with block\n\n";
+			return true;
+		}
+
+		//trzeba tu potem zamienic jak bedzie drugi gracz
+		/*if (mblock->getGlobalBounds().intersects(myPlayer->PlayerAnimatedSprite.getGlobalBounds())) {
+
+			std::cout << "collision by myPlayer2 with block";
+			return true;
+		}*/
+
+		//dodac jak bedzie juz drugi gracz
+		/*if (myPlayer->PlayerAnimatedSprite.getGlobalBounds().intersects(myPlayer2.PlayerAnimatedSprite.getGlobalBounds())) {
+			
+			std::cout << "collision between players";
+			return true;
+		}*/
+/*
+
+	}
+
+
+}*/

@@ -1,22 +1,25 @@
 #pragma once
-#include "Dimensions.h"
 #include <iostream>
+#include "Bomb.h"
 
 extern sf::RenderWindow window;
 
 class Block 
 {
-
-
 	
-	sf::Texture BlockTexture;
-
+	sf::Texture *BlockTexture;
+	Bomb *bomb = NULL;
 
 public:
+
+
 	sf::Sprite Square;
 	bool isDestructable = false;
 	bool isDestructed = false;
-	Block(sf::Vector2f mPos, int mTypeOfBlock) 
+
+	const sf::Vector2i position;
+
+	Block(sf::Vector2i mPos, int mTypeOfBlock, sf::Texture *texture) :position(mPos), BlockTexture(texture)
 	{
 
 		try 
@@ -31,10 +34,11 @@ public:
 				2	-	destructable
 				3	-	already destructed - floor block
 			*/
-			BlockTexture.loadFromFile("solidBricks.jpg");
 
-			Square.setTexture(BlockTexture);
-			Square.setPosition(mPos);
+			Square.setTexture(*BlockTexture);
+			Square.setPosition((sf::Vector2f)position);
+
+			
 
 
 			if (mTypeOfBlock == 1)
@@ -74,4 +78,20 @@ public:
 
 		return Square.getGlobalBounds();
 	}
+
+
+	void placeBomb(Bomb *mBomb) {
+
+		bomb = mBomb;
+	}
+
+	bool isThereBomb() {
+
+		if (bomb == NULL)
+			return false;
+
+		return true;
+	}
+
+
 };

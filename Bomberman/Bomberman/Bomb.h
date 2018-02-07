@@ -1,5 +1,5 @@
 #pragma once
-#include "Dimensions.h"
+#include <SFML/Graphics.hpp>
 
 class Bomb {
 
@@ -8,7 +8,7 @@ class Bomb {
 
 public:
 
-	Bomb(sf::Vector2f bombPosition);
+	Bomb(sf::Vector2i bombPosition);
 
 
 };
