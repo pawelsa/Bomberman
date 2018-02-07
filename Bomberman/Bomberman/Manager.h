@@ -23,6 +23,10 @@ private:
 	void Init();
 	
 	std::list<Block*> GetBlocks();
+
+
+	sf::Vector2f BlockSize = sf::Vector2f(60, 60);
+	sf::Texture BlockTexture;
 	
 
 	void PlaceABomb();

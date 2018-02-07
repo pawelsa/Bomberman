@@ -10,15 +10,16 @@ class Block
 
 
 	
-	sf::Texture BlockTexture;
+	sf::Texture *BlockTexture;
 
 public:
 	sf::Sprite Square;
-	Position Pos;
+	const Position Pos;
 
 	bool isDestructable = false;
 	bool isDestructed = false;
-	Block(sf::Vector2f mPos, int mTypeOfBlock, Position position);
+	Block(int mTypeOfBlock, Position position, sf::Texture *texture);
+
 
 	bool isDestroyed() 
 	{

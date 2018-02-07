@@ -5,6 +5,7 @@
 UiManager::UiManager()
 {
 	this->window = new sf::RenderWindow(sf::VideoMode(ScreenDimensions.x, ScreenDimensions.y), "Bomberman");
+	window->setFramerateLimit(60);
 }
 
 
@@ -12,7 +13,7 @@ UiManager::~UiManager()
 {
 }
 
-void UiManager::DrawBlocks(std::vector<Block*> blocks)
+void UiManager::DrawBlocks(std::list<Block*> blocks)
 {
 	for (Block* block : blocks)
 	{		

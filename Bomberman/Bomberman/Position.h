@@ -9,6 +9,7 @@ public:
 	int X;
 	int Y;
 
+	int operator==(Position right);
 
 private:
 

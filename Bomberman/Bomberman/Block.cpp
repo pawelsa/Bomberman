@@ -1,6 +1,6 @@
 #include "Block.h"
 
-Block::Block(sf::Vector2f mPos, int mTypeOfBlock, Position position)
+Block::Block( int mTypeOfBlock, Position position, sf::Texture *texture):Pos(position)
 {
 	try
 	{
@@ -14,10 +14,11 @@ Block::Block(sf::Vector2f mPos, int mTypeOfBlock, Position position)
 		2	-	destructable
 		3	-	already destructed - floor block
 		*/
-		BlockTexture.loadFromFile("solidBricks.jpg");
 
-		Square.setTexture(BlockTexture);
-		Square.setPosition(mPos);
+		BlockTexture = texture;
+
+		Square.setTexture(*BlockTexture);
+		Square.setPosition(sf::Vector2f(position.X*BlockSize.x, position.Y*BlockSize.y));
 
 
 		if (mTypeOfBlock == 1)
@@ -36,7 +37,6 @@ Block::Block(sf::Vector2f mPos, int mTypeOfBlock, Position position)
 			Square.setTextureRect(sf::IntRect(20, 200, BlockSize.x, BlockSize.y));
 		}
 
-		this->Pos = position;
 	}
 	catch (const std::exception& ex) {
 
@@ -44,3 +44,4 @@ Block::Block(sf::Vector2f mPos, int mTypeOfBlock, Position position)
 		throw ex;
 	}
 }
+

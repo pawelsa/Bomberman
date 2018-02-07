@@ -16,3 +16,13 @@ Position::Position(int x, int y)
 Position::~Position()
 {
 }
+
+int Position::operator==(Position right) {
+
+	if (this->X == right.X && this->Y == right.Y) {
+
+		return 1;
+	}
+
+	return 0;
+}

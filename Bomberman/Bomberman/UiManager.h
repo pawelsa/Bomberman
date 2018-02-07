@@ -16,7 +16,7 @@ public:
 
 	sf::RenderWindow* window;
 
-	void DrawBlocks(std::vector<Block*> blocks);
+	void DrawBlocks(std::list<Block*> blocks);
 	void DrawPlayer(Player* player);
 	void DrawBombs(std::list<Bomb*> bombs);
 };
