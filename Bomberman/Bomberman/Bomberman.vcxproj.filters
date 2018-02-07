@@ -30,7 +30,10 @@
     <ClCompile Include="AnimatedSprite.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Bomb.cpp">
+    <ClCompile Include="Manager.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="UiManager.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -56,7 +59,7 @@
     <ClInclude Include="AnimatedSprite.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Bomb.h">
+    <ClInclude Include="UiManager.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

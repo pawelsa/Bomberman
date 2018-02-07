@@ -1,52 +1,56 @@
 #pragma once
 #include "Dimensions.h"
 #include <iostream>
-#include "Bomb.h"
 
 extern sf::RenderWindow window;
 
-class Block {
+class Block 
+{
 
-	sf::Sprite Square;
 
-	bool isDestructable = false;
-	bool isDestructed = false;
-
-	Bomb *theBomb = NULL;
+	
+	sf::Texture BlockTexture;
 
 
 public:
+	sf::Sprite Square;
+	bool isDestructable = false;
+	bool isDestructed = false;
+	Block(sf::Vector2f mPos, int mTypeOfBlock) 
+	{
 
-	Block(sf::Vector2f mPos, int mTypeOfBlock) {
+		try 
+		{
+			sf::Vector2f BlockSize = sf::Vector2f(60, 60);
 
-		try {
 
 			/*
-			
 				Type of block:
 
 				1	-	solid block
 				2	-	destructable
 				3	-	already destructed - floor block
-
 			*/
-			
-			Square.setTexture(dim::BlockTexture);
+			BlockTexture.loadFromFile("solidBricks.jpg");
+
+			Square.setTexture(BlockTexture);
 			Square.setPosition(mPos);
 
 
-			if (mTypeOfBlock == 1) {
+			if (mTypeOfBlock == 1)
+			{
 				
-				Square.setTextureRect(sf::IntRect(20, 20, dim::BlockSize.x, dim::BlockSize.y));
+				Square.setTextureRect(sf::IntRect(20, 20, BlockSize.x,BlockSize.y));
 			}
-			else if (mTypeOfBlock == 2) {
+			else if (mTypeOfBlock == 2) 
+			{
 
-				Square.setTextureRect(sf::IntRect(20, 220, dim::BlockSize.x, dim::BlockSize.y));
+				Square.setTextureRect(sf::IntRect(20, 220, BlockSize.x, BlockSize.y));
 			}
-			else if (mTypeOfBlock == 3) {
-
+			else if (mTypeOfBlock == 3) 
+			{
 				isDestructed = true;
-				Square.setTextureRect(sf::IntRect(20, 200, dim::BlockSize.x, dim::BlockSize.y));
+				Square.setTextureRect(sf::IntRect(20, 200, BlockSize.x, BlockSize.y));
 			}
 			
 
@@ -60,25 +64,14 @@ public:
 
 	}
 
-	bool isDestroyed() {
-
+	bool isDestroyed() 
+	{
 		return isDestructed;
 	}
 
-	sf::FloatRect getGlobalBounds() {
+	sf::FloatRect getGlobalBounds() 
+	{
 
 		return Square.getGlobalBounds();
 	}
-
-	void display() {
-
-		window.draw(Square);
-	}
-
-	void plantBomb(Bomb *mBomb) {
-
-		theBomb = mBomb;
-	}
-
-
 };
