@@ -2,6 +2,7 @@
 #include "Movable.h"
 #include <SFML\Graphics.hpp>
 #include "AnimatedSprite.hpp"
+#include "Bomb.h"
 #include <time.h>
 
 extern sf::RenderWindow window;
@@ -13,6 +14,8 @@ class Player :
 public:
 	Player();
 	~Player();
+	
+
 	
 	void MoveRight();
 	void MoveLeft();

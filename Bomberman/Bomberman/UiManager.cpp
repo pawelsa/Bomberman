@@ -26,3 +26,11 @@ void UiManager::DrawPlayer(Player * player)
 	player->PlayerAnimatedSprite.play(*player->CurrentAnimation);
 	player->PlayerAnimatedSprite.update(frameClock.restart());
 }
+
+void UiManager::DrawBombs(std::list<Bomb*> bombs)
+{
+	for (Bomb* bomb : bombs)
+	{
+		window->draw(bomb->BombSprite);
+	}
+}

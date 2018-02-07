@@ -6,36 +6,26 @@
 
 class Manager 
 {
-	
-	
-
 public:
-	
 
 	Manager();
 	~Manager();
 
 	void GameLoop();
-	
-	void plantBomb();
-	
-
 
 private:
 
 	UiManager UIM;
-
-	sf::Texture BlockTexture;
-
-	sf::Vector2f BlockSize = sf::Vector2f(60, 60);
-
 	Player* myPlayer;
-	std::vector<Block*> Blocks;
+
+	std::list<Block*> Blocks;
+	std::list<Bomb*> BombList;
 	void Init();
 	
-	std::vector<Block*> GetBlocks();
+	std::list<Block*> GetBlocks();
 	
-	bool collision();
 
+	void PlaceABomb();
+	void BombHandling();
 
 };

@@ -29,9 +29,8 @@ void Manager::GameLoop()
 				for (Block* block : Blocks)
 				{
 					if (myPlayer->PlayerAnimatedSprite.getGlobalBounds().intersects(block->getGlobalBounds()) && block->isDestructed != true)
+						myPlayer->MoveDown();
 
-							myPlayer->MoveDown();
-						
 				}
 
 			}
@@ -43,8 +42,7 @@ void Manager::GameLoop()
 				{
 					
 					if (myPlayer->PlayerAnimatedSprite.getGlobalBounds().intersects(block->getGlobalBounds()) && block->isDestructed != true)
-
-							myPlayer->MoveUp();
+						myPlayer->MoveUp();
 
 				}
 
@@ -56,8 +54,8 @@ void Manager::GameLoop()
 				for (Block* block : Blocks)
 				{
 					if (myPlayer->PlayerAnimatedSprite.getGlobalBounds().intersects(block->getGlobalBounds()) && block->isDestructed != true)
+						myPlayer->MoveRight();
 
-							myPlayer->MoveRight();
 				}
 			}
 
@@ -67,20 +65,21 @@ void Manager::GameLoop()
 				for (Block* block : Blocks)
 				{
 					if (myPlayer->PlayerAnimatedSprite.getGlobalBounds().intersects(block->getGlobalBounds()) && block->isDestructed != true)
-
-							myPlayer->MoveLeft();
+						myPlayer->MoveLeft();
 
 				}
 			}
 
-			if (sf::Keyboard::isKeyPressed(sf::Keyboard::LControl)) {
-
-				plantBomb();
+			if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space))
+			{
+				PlaceABomb();
 			}
 
 		}
+		BombHandling();
 		UIM.DrawBlocks(GetBlocks());
 		UIM.DrawPlayer(myPlayer);
+		UIM.DrawBombs(BombList);
 		UIM.window->display();
 	}
 }
@@ -91,7 +90,6 @@ void Manager::Init()
 
 		sf::Vector2f BlockSize = sf::Vector2f(60, 60);
 
-		BlockTexture.loadFromFile("solidBricks.jpg");
 
 		for (int mY = 0; mY < 11; mY++) {
 
@@ -99,13 +97,16 @@ void Manager::Init()
 
 				if ((mY % 2 == 0 && mX % 2 == 0) || mY == 0 || mX == 0 || mY == 10 || mX == 14)
 				{
-					Blocks.push_back(new Block(sf::Vector2i(mX*BlockSize.x, mY*BlockSize.y), 1, &BlockTexture));
+					sf::Vector2f coordinatesOfBlockToAdd = sf::Vector2f(mX*BlockSize.x, mY*BlockSize.y);
+					Position positonOfBlockToAdd = Position(mX, mY);
+					Blocks.push_front(new Block(coordinatesOfBlockToAdd, 1, positonOfBlockToAdd));
 
 				}
 				else 
 				{
-
-					Blocks.push_back(new Block(sf::Vector2i(mX*BlockSize.x, mY*BlockSize.y), 3, &BlockTexture));
+					sf::Vector2f coordinatesOfBlockToAdd = sf::Vector2f(mX*BlockSize.x, mY*BlockSize.y);
+					Position positonOfBlockToAdd = Position(mX, mY);
+					Blocks.push_front(new Block(coordinatesOfBlockToAdd, 3, positonOfBlockToAdd));
 				}
 			}
 		}
@@ -122,60 +123,30 @@ void Manager::Init()
 }
 
 
-std::vector<Block*> Manager::GetBlocks()
+std::list<Block*> Manager::GetBlocks()
 {
 	return Blocks;
 }
 
-void Manager::plantBomb() {
-
-
-	sf::Vector2i centerOfPlayerBody = sf::Vector2i(myPlayer->PlayerAnimatedSprite.getGlobalBounds().left+myPlayer->PlayerAnimatedSprite.getGlobalBounds().width/2,
-		myPlayer->PlayerAnimatedSprite.getGlobalBounds().top + myPlayer->PlayerAnimatedSprite.getGlobalBounds().height / 2);
-
-
-	centerOfPlayerBody = sf::Vector2i(centerOfPlayerBody.x / BlockSize.x, centerOfPlayerBody.y / BlockSize.y);
-
-	for (int i = 0; i < Blocks.size(); i++) {
-	
-		if (Blocks.at(i)->position == centerOfPlayerBody) {
-		
-			Blocks.at(i)->placeBomb(new Bomb(centerOfPlayerBody));
-		}
-
-	}
-
+void Manager::PlaceABomb()
+{
+	auto playerPosition = myPlayer->PlayerAnimatedSprite.getPosition();
+	Bomb* bombToAdd = new Bomb(playerPosition);
+	BombList.push_front(bombToAdd);
 }
 
-/*
-bool Manager::collision() {
-
-
-
-	for (Block *mblock : Blocks) {
-
-		if(mblock->getGlobalBounds().intersects(myPlayer->PlayerAnimatedSprite.getGlobalBounds()) && !mblock->isDestroyed()) {
-
-			std::cout << "collision by myPlayer1 with block\n\n";
-			return true;
+void Manager::BombHandling()
+{
+	auto listOfBombs = BombList;
+	for (Bomb* bomb : BombList)
+	{
+		bomb->BombTimer();
+		if (bomb->BombLifetime == 0)
+		{
+			listOfBombs.remove(bomb);
 		}
-
-		//trzeba tu potem zamienic jak bedzie drugi gracz
-		/*if (mblock->getGlobalBounds().intersects(myPlayer->PlayerAnimatedSprite.getGlobalBounds())) {
-
-			std::cout << "collision by myPlayer2 with block";
-			return true;
-		}*/
-
-		//dodac jak bedzie juz drugi gracz
-		/*if (myPlayer->PlayerAnimatedSprite.getGlobalBounds().intersects(myPlayer2.PlayerAnimatedSprite.getGlobalBounds())) {
-			
-			std::cout << "collision between players";
-			return true;
-		}*/
-/*
-
 	}
+	BombList = listOfBombs;
+}
 
 
-}*/

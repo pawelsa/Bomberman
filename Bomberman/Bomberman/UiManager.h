@@ -18,6 +18,6 @@ public:
 
 	void DrawBlocks(std::vector<Block*> blocks);
 	void DrawPlayer(Player* player);
-
+	void DrawBombs(std::list<Bomb*> bombs);
 };
 

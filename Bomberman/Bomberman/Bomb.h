@@ -1,14 +1,19 @@
 #pragma once
-#include <SFML/Graphics.hpp>
+#include "SFML\Graphics.hpp"
 
-class Bomb {
-
-	const sf::Vector2f position;
-
-
+class Bomb 
+{
 public:
+	sf::Sprite BombSprite;
 
-	Bomb(sf::Vector2i bombPosition);
+	Bomb(sf::Vector2f bombPosition);
 
+	void BombTimer();
+	int BombLifetime;
+
+
+private:
+	const sf::Vector2f position;
+	sf::Texture BombTexture;
 
 };
