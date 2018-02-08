@@ -17,12 +17,12 @@ Position::~Position()
 {
 }
 
-int Position::operator==(Position right) {
+bool Position::operator==(Position &right) {
 
 	if (this->X == right.X && this->Y == right.Y) {
 
-		return 1;
+		return true;
 	}
 
-	return 0;
+	return false;
 }

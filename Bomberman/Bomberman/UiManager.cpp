@@ -35,3 +35,11 @@ void UiManager::DrawBombs(std::list<Bomb*> bombs)
 		window->draw(bomb->BombSprite);
 	}
 }
+
+void UiManager::DrawFire(std::list<Fire*> fire)
+{
+	for (Fire* myFire : fire)
+	{
+		window->draw(myFire->FireSprite);
+	}
+}

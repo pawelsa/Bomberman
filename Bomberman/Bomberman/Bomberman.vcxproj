@@ -127,6 +127,7 @@
     <ClCompile Include="Animation.cpp" />
     <ClCompile Include="Block.cpp" />
     <ClCompile Include="Bomb.cpp" />
+    <ClCompile Include="Fire.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Manager.cpp" />
     <ClCompile Include="Movable.cpp" />
@@ -139,6 +140,7 @@
     <ClInclude Include="Animation.hpp" />
     <ClInclude Include="Block.h" />
     <ClInclude Include="Bomb.h" />
+    <ClInclude Include="Fire.h" />
     <ClInclude Include="Manager.h" />
     <ClInclude Include="Movable.h" />
     <ClInclude Include="Player.h" />

@@ -30,4 +30,10 @@ public:
 	{
 		return Square.getGlobalBounds();
 	}
+
+	sf::Vector2f getSquarePosition()
+	{
+		return Square.getPosition();
+	}
+	
 };

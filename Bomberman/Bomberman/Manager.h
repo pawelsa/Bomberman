@@ -3,6 +3,7 @@
 #include "Player.h"
 #include <list>
 #include "UiManager.h"
+#include "Fire.h"
 
 class Manager 
 {
@@ -19,6 +20,7 @@ private:
 	Player* myPlayer;
 
 	std::list<Block*> Blocks;
+	std::list<Fire*> FireList;
 	std::list<Bomb*> BombList;
 	void Init();
 	
@@ -31,5 +33,9 @@ private:
 
 	void PlaceABomb();
 	void BombHandling();
+	void ExplodeBomb(Bomb* bomb);
+	Block* GetBlock(Position position);
+
+	void FireHandling();
 
 };

@@ -70,16 +70,18 @@ void Manager::GameLoop()
 				}
 			}
 
-			if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space))
+			if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space) && myPlayer->BombNumber != 0)
 			{
 				PlaceABomb();
 			}
 
 		}
 		BombHandling();
+		FireHandling();
 		UIM.DrawBlocks(GetBlocks());
 		UIM.DrawPlayer(myPlayer);
 		UIM.DrawBombs(BombList);
+		UIM.DrawFire(FireList);
 		UIM.window->display();
 	}
 }
@@ -129,26 +131,28 @@ std::list<Block*> Manager::GetBlocks()
 
 void Manager::PlaceABomb()
 {
+	bool canBePlaced = true;
 	sf::Vector2i centerOfPlayerBody = sf::Vector2i(myPlayer->PlayerAnimatedSprite.getGlobalBounds().left + myPlayer->PlayerAnimatedSprite.getGlobalBounds().width / 2,
 		myPlayer->PlayerAnimatedSprite.getGlobalBounds().top + myPlayer->PlayerAnimatedSprite.getGlobalBounds().height / 2);
 
 	Position playerOnArena((int)centerOfPlayerBody.x / BlockSize.x, (int)centerOfPlayerBody.y / BlockSize.y);
-	
-	//sprawdza czy nie byla tu juz stworzona, wczesniej robily sie po 2 na jedno pole nwm dlaczego
-	auto listOfBombs = BombList;
-
-	for (Bomb* bomb : listOfBombs)
-	{
-		if (bomb->getPosition() == playerOnArena) {
-
-			return;
-		}
-	}
-
-	BombList = listOfBombs;
 
 	Bomb* bombToAdd = new Bomb(playerOnArena);
-	BombList.push_front(bombToAdd);
+	for (Bomb* bomb : BombList)
+	{
+		if (bomb->getPosition().X == bombToAdd->getPosition().X && bomb->getPosition().Y == bombToAdd->getPosition().Y)
+		{
+			canBePlaced = false;
+		}
+
+	}
+	if (canBePlaced)
+	{
+		BombList.push_front(bombToAdd);
+		myPlayer->BombNumber--;
+	}
+
+	
 }
 
 void Manager::BombHandling()
@@ -162,9 +166,70 @@ void Manager::BombHandling()
 		{
 			listOfBombs.remove(bomb);
 			std::cout << "BOOM\n\n";
+			ExplodeBomb(bomb);
+			myPlayer->BombNumber++;
 		}
 	}
 	BombList = listOfBombs;
+}
+
+void Manager::ExplodeBomb(Bomb * bomb)
+{
+	Position bombPosition = bomb->getPosition();
+	Position chceckon(bombPosition.X + 1, bombPosition.Y);
+	Position chceckon1(bombPosition.X - 1, bombPosition.Y);
+	Position chceckon2(bombPosition.X , bombPosition.Y + 1);
+	Position chceckon3(bombPosition.X, bombPosition.Y -1);
+
+	if (GetBlock(chceckon)->isDestroyed() == true)
+	{
+		Fire* fireToAdd = new Fire(GetBlock(chceckon)->getSquarePosition());
+		FireList.push_front(fireToAdd);
+	}
+		
+	if (GetBlock(chceckon1)->isDestroyed() == true)
+	{
+		Fire* fireToAdd = new Fire(GetBlock(chceckon1)->getSquarePosition());
+		FireList.push_front(fireToAdd);
+
+	}
+	if (GetBlock(chceckon2)->isDestroyed() == true)
+	{
+		Fire* fireToAdd = new Fire(GetBlock(chceckon2)->getSquarePosition());
+		FireList.push_front(fireToAdd);
+
+	}
+	if (GetBlock(chceckon3)->isDestroyed() == true)
+	{
+		Fire* fireToAdd = new Fire(GetBlock(chceckon3)->getSquarePosition());
+		FireList.push_front(fireToAdd);
+	}
+		
+}
+
+Block* Manager::GetBlock(Position position)
+{
+	for (Block* block : Blocks)
+	{
+		if (block->Pos.X == position.X && block->Pos.Y == position.Y)
+			return block;
+	}
+}
+
+void Manager::FireHandling()
+{
+	auto tempList = FireList;
+	for (Fire* myFire : FireList)
+	{
+		myFire->FireTimer();
+		if (myFire->FireLifeTime == 0)
+		{
+			tempList.remove(myFire);
+		}
+
+	}
+	FireList = tempList;
+
 }
 
 

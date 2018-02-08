@@ -15,6 +15,8 @@ public:
 	Player();
 	~Player();
 	
+	int BombNumber;
+	int BombPower;
 
 	
 	void MoveRight();

@@ -67,5 +67,7 @@ void Player::Init()
 	SetCurrentAnimationDown();
 	PlayerAnimatedSprite.setPosition(100, 100);
 	
+	BombNumber = 3;
+	BombPower = 1;
 
 }

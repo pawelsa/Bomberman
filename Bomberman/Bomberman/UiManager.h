@@ -3,6 +3,7 @@
 #include "Player.h"
 #include <list>
 #include "Block.h"
+#include "Fire.h"
 
 
 class UiManager
@@ -19,5 +20,6 @@ public:
 	void DrawBlocks(std::list<Block*> blocks);
 	void DrawPlayer(Player* player);
 	void DrawBombs(std::list<Bomb*> bombs);
+	void DrawFire(std::list<Fire*> fire);
 };
 
