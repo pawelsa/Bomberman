@@ -29,7 +29,7 @@ private:
 
 
 	void Init();
-	int Speed = 1;
+	int Speed = 5;
 	sf::Texture Texture;
 };
 

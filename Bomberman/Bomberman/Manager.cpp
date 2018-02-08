@@ -90,7 +90,7 @@ void Manager::Init()
 
 		sf::Vector2f BlockSize = sf::Vector2f(60, 60);
 
-		BlockTexture.loadFromFile("solidBricks.jpg");
+		BlockTexture.loadFromFile("Images/Blocks.png");
 
 		for (int mY = 0; mY < 11; mY++) {
 

@@ -24,17 +24,17 @@ Block::Block( int mTypeOfBlock, Position position, sf::Texture *texture):Pos(pos
 		if (mTypeOfBlock == 1)
 		{
 
-			Square.setTextureRect(sf::IntRect(20, 20, BlockSize.x, BlockSize.y));
+			Square.setTextureRect(sf::IntRect(60, 0, BlockSize.x, BlockSize.y));
 		}
 		else if (mTypeOfBlock == 2)
 		{
 
-			Square.setTextureRect(sf::IntRect(20, 220, BlockSize.x, BlockSize.y));
+			Square.setTextureRect(sf::IntRect(120, 0, BlockSize.x, BlockSize.y));
 		}
 		else if (mTypeOfBlock == 3)
 		{
 			isDestructed = true;
-			Square.setTextureRect(sf::IntRect(20, 200, BlockSize.x, BlockSize.y));
+			Square.setTextureRect(sf::IntRect(0, 0, BlockSize.x, BlockSize.y));
 		}
 
 	}

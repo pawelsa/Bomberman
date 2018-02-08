@@ -2,7 +2,7 @@
 
 Bomb::Bomb(Position mPosition):PosOnArena(mPosition)
 {
-	this->BombTexture.loadFromFile("Images/Bomberman.png", sf::IntRect(84, 21, 14, 16));
+	this->BombTexture.loadFromFile("Images/Bomb.png");
 	this->BombSprite.setTexture(BombTexture);
 
 	sf::Vector2f BlockSize = sf::Vector2f(60, 60);
