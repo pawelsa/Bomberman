@@ -4,6 +4,7 @@
 #include <list>
 #include "Block.h"
 #include "Fire.h"
+#include <vector>
 
 
 class UiManager
@@ -18,8 +19,10 @@ public:
 	sf::RenderWindow* window;
 
 	void DrawBlocks(std::list<Block*> blocks);
-	void DrawPlayer(Player* player);
+	void DrawPlayers(std::vector<Player*> PlayerList);
 	void DrawBombs(std::list<Bomb*> bombs);
 	void DrawFire(std::list<Fire*> fire);
+
+	void CreateWindow();
 };
 

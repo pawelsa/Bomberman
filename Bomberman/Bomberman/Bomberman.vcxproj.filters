@@ -48,6 +48,12 @@
     <ClCompile Include="Fire.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="SoftBlock.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="HardBlock.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Block.h">
@@ -78,6 +84,12 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Fire.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="SoftBlock.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="HardBlock.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

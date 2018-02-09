@@ -4,13 +4,12 @@
 
 UiManager::UiManager()
 {
-	this->window = new sf::RenderWindow(sf::VideoMode(ScreenDimensions.x, ScreenDimensions.y), "Bomberman");
-	window->setFramerateLimit(60);
 }
 
 
 UiManager::~UiManager()
 {
+	delete this->window;
 }
 
 void UiManager::DrawBlocks(std::list<Block*> blocks)
@@ -21,11 +20,15 @@ void UiManager::DrawBlocks(std::list<Block*> blocks)
 	}
 }
 
-void UiManager::DrawPlayer(Player * player)
+void UiManager::DrawPlayers(std::vector<Player*> PlayerList)
 {
-	window->draw(player->PlayerAnimatedSprite);
-	player->PlayerAnimatedSprite.play(*player->CurrentAnimation);
-	player->PlayerAnimatedSprite.update(frameClock.restart());
+	for (Player* player : PlayerList)
+	{
+		window->draw(player->PlayerAnimatedSprite);
+		player->PlayerAnimatedSprite.play(*player->CurrentAnimation);
+		player->PlayerAnimatedSprite.update(frameClock.restart());
+	}
+	
 }
 
 void UiManager::DrawBombs(std::list<Bomb*> bombs)
@@ -42,4 +45,10 @@ void UiManager::DrawFire(std::list<Fire*> fire)
 	{
 		window->draw(myFire->FireSprite);
 	}
+}
+
+void UiManager::CreateWindow()
+{
+	this->window = new sf::RenderWindow(sf::VideoMode(ScreenDimensions.x, ScreenDimensions.y), "Bomberman");
+	this->window->setFramerateLimit(60);
 }

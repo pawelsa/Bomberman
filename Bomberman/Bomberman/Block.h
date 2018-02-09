@@ -5,20 +5,18 @@
 #include "SFML\Graphics.hpp"
 
 
-class Block 
+class Block
 {
-
-
-	
-	sf::Texture *BlockTexture;
-
 public:
+	sf::Texture BlockTexture;
+	Block() {};
+
 	sf::Sprite Square;
 	const Position Pos;
 
 	bool isDestructable = false;
-	bool isDestructed = false;
-	Block(int mTypeOfBlock, Position position, sf::Texture *texture);
+	bool isDestructed = true;
+	Block(Position position);
 
 
 	bool isDestroyed() 

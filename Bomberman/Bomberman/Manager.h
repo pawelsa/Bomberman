@@ -3,6 +3,8 @@
 #include "Player.h"
 #include <list>
 #include "UiManager.h"
+#include "SoftBlock.h"
+#include "HardBlock.h"
 #include "Fire.h"
 
 class Manager 
@@ -12,13 +14,18 @@ public:
 	Manager();
 	~Manager();
 
-	void GameLoop();
+	bool GameLoop();
+	bool InitIntro();
+	void ErrorPopOut(const std::exception& ex);
+	void InitEndGameWindow();
 
 private:
 
 	UiManager UIM;
-	Player* myPlayer;
 
+	void CheckPlayersAndFire();
+	
+	std::vector<Player*> PlayerList;
 	std::list<Block*> Blocks;
 	std::list<Fire*> FireList;
 	std::list<Bomb*> BombList;
@@ -31,11 +38,14 @@ private:
 	sf::Texture BlockTexture;
 	
 
-	void PlaceABomb();
+	void PlaceABomb(Player* player);
 	void BombHandling();
 	void ExplodeBomb(Bomb* bomb);
 	Block* GetBlock(Position position);
 
 	void FireHandling();
+
+	void FirstPlayerHandling();
+	void SecondPlayerHandling();
 
 };

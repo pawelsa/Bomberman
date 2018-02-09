@@ -6,6 +6,13 @@ Player::Player()
 	Init();
 }
 
+Player::Player(int id)
+{
+	this->PlayerId = id;
+
+	Init();
+}
+
 
 Player::~Player()
 {
@@ -15,21 +22,18 @@ void Player::MoveRight()
 {
 	SetCurrentAnimationRight();
 	PlayerAnimatedSprite.move(Speed,0);
-
 }
 
 void Player::MoveLeft()
 {
 	SetCurrentAnimationLeft();
 	PlayerAnimatedSprite.move(-Speed, 0);
-
 }
 
 void Player::MoveUp()
 {
 	SetCurrentAnimationUp();
 	PlayerAnimatedSprite.move(0, -Speed);
-
 }
 
 void Player::MoveDown()
@@ -65,9 +69,13 @@ void Player::Init()
 	WalkingUpAnimation.addFrame(sf::IntRect(30, 21, 12, 16));
 
 	SetCurrentAnimationDown();
-	PlayerAnimatedSprite.setPosition(100, 100);
-	
+
+	if(this->PlayerId == 1)
+		PlayerAnimatedSprite.setPosition(100, 100);
+	if (this->PlayerId == 2)
+		PlayerAnimatedSprite.setPosition(800, 550);
+
 	BombNumber = 3;
-	BombPower = 1;
+	BombPower = 2;
 
 }

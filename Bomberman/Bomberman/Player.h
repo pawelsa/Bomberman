@@ -13,12 +13,14 @@ class Player :
 {
 public:
 	Player();
+	Player(int id);
+
 	~Player();
 	
 	int BombNumber;
 	int BombPower;
 
-	
+	int PlayerId;
 	void MoveRight();
 	void MoveLeft();
 	void MoveUp();
@@ -31,7 +33,7 @@ private:
 
 
 	void Init();
-	int Speed = 5;
+	int Speed = 2;
 	sf::Texture Texture;
 };
 

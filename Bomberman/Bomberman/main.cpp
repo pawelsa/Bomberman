@@ -5,8 +5,20 @@ int main()
 
 	Manager *newManager = new Manager();
 	
+	
 
-	newManager->GameLoop();
+	try
+	{
+		if (newManager->InitIntro())
+			if(newManager->GameLoop())
+				newManager->InitEndGameWindow();
+
+				
+	}
+	catch (const std::exception& ex)
+	{
+		newManager->ErrorPopOut(ex);
+	}
 
 	return 0;
 }
